@@ -1,15 +1,17 @@
-package app;
+package app.game_logic;
 
 import java.util.*;
 import java.util.concurrent.*;
 
+import app.game_logic.game_objects.GameObject;
+
 public class GameLoop {
     private static ScheduledExecutorService executor;
-    private static final int FPS = 2;
+    private static final int UpdatesPerSecond = 2;
     private static List<GameObject> gameObjects;
     private static Boolean running = false;
 
-    GameLoop() {
+    public GameLoop() {
         startGame();
     }
 
@@ -34,15 +36,21 @@ public class GameLoop {
             @Override
             public void run() {
                 updateGame();
+                lateUpdate();
             }
-        }, 0, 1000 / FPS, TimeUnit.MILLISECONDS);
+        }, 0, 1000 / UpdatesPerSecond, TimeUnit.MILLISECONDS);
         running = true;
     }
 
     private void updateGame() {
-        System.out.println("Updating game");
         for(GameObject gameObject : gameObjects){
             gameObject.update();
+        }
+    }
+
+    private void lateUpdate() {
+        for(GameObject gameObject : gameObjects){
+            gameObject.lateUpdate();
         }
     }
 

@@ -1,4 +1,4 @@
-package app;
+package app.rendering;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -14,14 +14,14 @@ public class GameWindow extends Canvas {
     private ScheduledExecutorService executor;
 
     private static final long serialVersionUID = 1L;
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 1000;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 1000;
     private static final String TITLE = "GameOfLife";
     private static final int FPS = 30;
 
     private JFrame frame;
+    private GridRenderer gridRenderer;
 
-    private Thread thread;
     private boolean running = false;
 
     public GameWindow() {
@@ -48,6 +48,10 @@ public class GameWindow extends Canvas {
     }
 
     public void start() {
+        if(running){
+            return;
+        }
+        gridRenderer = new GridRenderer();
         executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -75,9 +79,7 @@ public class GameWindow extends Canvas {
         Graphics g = bufferStrategy.getDrawGraphics();
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
-
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, 100, 100);
+        gridRenderer.render(g);
 
         g.dispose();
         bufferStrategy.show();
