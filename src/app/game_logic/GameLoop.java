@@ -1,57 +1,46 @@
-package app.game_logic;
+// package app.game_logic;
 
-import java.util.*;
-import java.util.concurrent.*;
+// import java.util.*;
 
-import app.game_logic.game_objects.GameObject;
+// import app.game_logic.game_objects.GameObject;
 
-public class GameLoop {
-    private static ScheduledExecutorService executor;
-    private static final int UpdatesPerSecond = 2;
-    private static List<GameObject> gameObjects;
-    private static Boolean running = false;
+// public class GameLoop extends TimerTask{
 
-    public GameLoop() {
-        startGame();
-    }
+//     private static List<GameObject> gameObjects;
 
-    public static void addListener(GameObject gameObject) {
-        gameObjects.add(gameObject);
-    }
+//     public GameLoop() {
+//         gameObjects = new ArrayList<GameObject>();
+//     }
 
-    public static void removeListener(GameObject gameObject){
-        gameObjects.remove(gameObject);
-    }
+//     public static void addListener(GameObject gameObject) {
+//         gameObjects.add(gameObject);
+//     }
 
-    private void startGame() {
-        if(running){
-            return;
-        }
+//     public static void removeListener(GameObject gameObject){
+//         gameObjects.remove(gameObject);
+//     }
 
-        gameObjects = new ArrayList<GameObject>();
+//     // public void updateGame() {
+//     //     System.out.println("game update");
+//     //     for(GameObject gameObject : gameObjects){
+//     //         gameObject.update();
+//     //     }
+//     // }
 
-        executor = Executors.newScheduledThreadPool(1);
+//     // public void lateUpdate() {
+//     //     for(GameObject gameObject : gameObjects){
+//     //         gameObject.lateUpdate();
+//     //     }
+//     // }
 
-        executor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                updateGame();
-                lateUpdate();
-            }
-        }, 0, 1000 / UpdatesPerSecond, TimeUnit.MILLISECONDS);
-        running = true;
-    }
+//     @Override
+//     public void run() {
+//         for(GameObject gameObject : gameObjects){
+//             gameObject.update();
+//         }
+//         for(GameObject gameObject : gameObjects){
+//             gameObject.lateUpdate();
+//         }
+//     }
 
-    private void updateGame() {
-        for(GameObject gameObject : gameObjects){
-            gameObject.update();
-        }
-    }
-
-    private void lateUpdate() {
-        for(GameObject gameObject : gameObjects){
-            gameObject.lateUpdate();
-        }
-    }
-
-}
+// }

@@ -1,6 +1,4 @@
-package app.game_logic.game_objects;
-
-import app.game_logic.LifeEntityState;
+package app.version2;
 
 public class LifeEntity extends GameObject {
 
@@ -14,11 +12,13 @@ public class LifeEntity extends GameObject {
     public void update() {
     }
 
-    @Override
-    public void lateUpdate() {
-    }
-
     public void setState(LifeEntityState state) {
         this.state = state;
+    }
+
+    @Override
+    public void lateUpdate() {
+        // TODO Auto-generated method stub
+
     }
 }

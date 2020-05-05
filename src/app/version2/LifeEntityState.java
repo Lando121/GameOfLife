@@ -1,4 +1,4 @@
-package app.game_logic;
+package app.version2;
 
 public enum LifeEntityState {
     ALIVE,
