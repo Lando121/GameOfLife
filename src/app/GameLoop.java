@@ -44,7 +44,6 @@ public class GameLoop {
         for(GameObject gameObject : gameObjects){
             gameObject.update();
         }
-        // the game code
     }
 
 }
