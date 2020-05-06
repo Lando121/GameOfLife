@@ -1,4 +1,4 @@
-package app.version2;
+package app;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,7 +12,6 @@ public class GridRenderer extends RenderObject{
     }
 
     public void render(Graphics g) {
-        System.out.println("render grid");
         int gridItemWidth = Game.WIDTH / Grid.GRIDWIDTH;
         int gridItemHeight = Game.HEIGHT / Grid.GRIDHEIGHT;
 

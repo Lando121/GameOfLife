@@ -1,5 +1,5 @@
 
-package app.version2;
+package app;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,10 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas  {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 1000;
     private static final String TITLE = "GameOfLife";
-
-    private Thread thread;
 
     private long lastLoopTime = System.currentTimeMillis();
     private long currentTime;
@@ -23,7 +21,7 @@ public class Game extends Canvas implements Runnable {
     private static List<GameObject> gameObjects = new ArrayList<>();
     private static List<RenderObject> renderObjects = new ArrayList<>();
 
-    private static final int FPS = 2;
+    private static final int FPS = 5;
     private boolean isRunning = true;
 
     public static void main(String args[]) {
@@ -49,12 +47,11 @@ public class Game extends Canvas implements Runnable {
     Game() {
         Window window = new Window(WIDTH, HEIGHT, TITLE, this);
         new GridRenderer();
-        thread = new Thread(this);
-        thread.start();
+        runGameLoop();
     }
 
-    @Override
-    public void run() {
+ 
+    public void runGameLoop() {
         while (isRunning) {
             currentTime = System.currentTimeMillis();
 

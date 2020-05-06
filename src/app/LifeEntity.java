@@ -1,6 +1,6 @@
-package app.version2;
+package app;
 
-public class LifeEntity extends GameObject {
+public class LifeEntity {
 
     public LifeEntityState state;
 
@@ -8,17 +8,13 @@ public class LifeEntity extends GameObject {
         this.state = state;
     }
 
-    @Override
-    public void update() {
-    }
-
     public void setState(LifeEntityState state) {
         this.state = state;
     }
 
     @Override
-    public void lateUpdate() {
-        // TODO Auto-generated method stub
-
+    public LifeEntity clone() {
+        LifeEntity clone = new LifeEntity(state);
+        return clone;
     }
 }

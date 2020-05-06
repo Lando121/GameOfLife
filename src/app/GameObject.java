@@ -1,4 +1,4 @@
-package app.version2;
+package app;
 
 public abstract class GameObject {
 
