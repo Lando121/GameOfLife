@@ -5,8 +5,8 @@ import java.util.Random;
 public class EnumUtils {
     static final Random random = new Random(); 
 
-    public static <T extends Enum<?>> T randomEnum(Class<T> t) {
-        int x = random.nextInt(t.getEnumConstants().length);
-        return t.getEnumConstants()[x];
+    public static <T extends Enum<?>> T randomEnum(Class<T> enumClass) {
+        int randomNumber = random.nextInt(enumClass.getEnumConstants().length);
+        return enumClass.getEnumConstants()[randomNumber];
     }
 }

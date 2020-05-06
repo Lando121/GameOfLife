@@ -5,22 +5,25 @@ import java.awt.Graphics;
 
 import app.Game;
 import app.components.Grid;
-import app.utility.*;
+import app.models.LifeEntityState;
 
-public class GridRenderer extends RenderObject{
+public class GridRenderer extends RenderListener{
+    private final int gridWidth;
+    private final int gridHeight;
+    private final Grid grid;
 
-    private Grid grid;
-
-    public GridRenderer() {
-        grid = new Grid();
+    public GridRenderer(int width, int height) {
+        gridWidth = width;
+        gridHeight = height;
+        grid = new Grid(width, height);
     }
 
     public void render(Graphics g) {
-        int gridItemWidth = Game.WIDTH / Grid.GRIDWIDTH;
-        int gridItemHeight = Game.HEIGHT / Grid.GRIDHEIGHT;
+        int gridItemWidth = Game.WINDOW_WIDTH / gridWidth;
+        int gridItemHeight = Game.WINDOW_HEIGHT / gridHeight;
 
-        for (int i = 0; i < Grid.GRIDWIDTH; i++) {
-            for (int j = 0; j < Grid.GRIDHEIGHT; j++) {
+        for (int i = 0; i < grid.gridWidth; i++) {
+            for (int j = 0; j < grid.gridHeight; j++) {
                 if (grid.gridOfLifeEntities[i][j].state == LifeEntityState.ALIVE) {
                     g.setColor(Color.BLACK);
                     g.fillRect(i * gridItemWidth, j * gridItemHeight, gridItemWidth, gridItemHeight);

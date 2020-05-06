@@ -1,6 +1,4 @@
-package app.components;
-
-import app.utility.LifeEntityState;
+package app.models;
 
 public class LifeEntity {
 

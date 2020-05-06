@@ -1,12 +1,11 @@
 package app.rendering;
 
 import javax.swing.JFrame;
-import app.Game;
 import java.awt.Dimension;
 
 public class Window {
 
-    public Window (int width, int height, String title, Game game) {
+    public Window (int width, int height, String title, Renderer game) {
         game.setPreferredSize(new Dimension (width, height));
         game.setMaximumSize(new Dimension (width, height));
         game.setMinimumSize(new Dimension (width, height));

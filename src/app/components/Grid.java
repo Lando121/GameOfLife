@@ -2,27 +2,41 @@ package app.components;
 
 import java.util.ArrayList;
 
-import app.utility.*;
-import app.rules.*;
+import app.utility.EnumUtils;
+import app.models.*;
+import app.rules.Evolution;
 
-public class Grid extends GameObject {
-    public static final int GRIDWIDTH = 100;
-    public static final int GRIDHEIGHT = 100;
+public class Grid extends UpdateListener {
+    public final int gridWidth;
+    public final int gridHeight;
 
-    public LifeEntity[][] gridOfLifeEntities = new LifeEntity[GRIDWIDTH][GRIDHEIGHT];
-    private LifeEntity[][] cachedGridOfLifeEntities = new LifeEntity[GRIDWIDTH][GRIDHEIGHT];
-    private GridOffset[] neighbourIndexOffsets = new GridOffset[8];
+    public final LifeEntity[][] gridOfLifeEntities;
+    private final LifeEntity[][] cachedGridOfLifeEntities;
+    private final GridOffset[] neighbourIndexOffsets = new GridOffset[8];
 
-    public Grid() {
+    public Grid(int width, int height) {
+        gridWidth = width;
+        gridHeight = height;
+        gridOfLifeEntities = new LifeEntity[gridWidth][gridHeight];
+        cachedGridOfLifeEntities = new LifeEntity[gridWidth][gridHeight];
         initGridOfLifeEntities();
+        initCachedGridOfLifeEntities();
         initNeighbourIndexOffsets();
     }
 
     private void initGridOfLifeEntities() {
-        for (int i = 0; i < GRIDWIDTH; i++) {
-            for (int j = 0; j < GRIDHEIGHT; j++) {
+        for (int i = 0; i < gridWidth; i++) {
+            for (int j = 0; j < gridHeight; j++) {
                 LifeEntityState state = EnumUtils.randomEnum(LifeEntityState.class);
                 gridOfLifeEntities[i][j] = new LifeEntity(state);
+            }
+        }
+    }
+
+    private void initCachedGridOfLifeEntities() {
+        for (int i = 0; i < gridWidth; i++) {
+            for (int j = 0; j < gridHeight; j++) {
+                cachedGridOfLifeEntities[i][j] = new LifeEntity(gridOfLifeEntities[i][j]);
             }
         }
     }
@@ -45,23 +59,35 @@ public class Grid extends GameObject {
     }
 
     private void cacheCurrentStateOfLifeEntities() {
-        for (int i = 0; i < GRIDWIDTH; i++) {
-            for (int j = 0; j < GRIDHEIGHT; j++) {
-                LifeEntity copy = new LifeEntity(gridOfLifeEntities[i][j]);
-                cachedGridOfLifeEntities[i][j] = copy;
+        for (int i = 0; i < gridWidth; i++) {
+            for (int j = 0; j < gridHeight; j++) {
+                cachedGridOfLifeEntities[i][j].state = gridOfLifeEntities[i][j].state;
             }
         }
     }
 
     private void performEvolutionOnLifeEntities() {
-        for (int i = 0; i < GRIDWIDTH; i++) {
-            for (int j = 0; j < GRIDHEIGHT; j++) {
+        for (int i = 0; i < gridWidth; i++) {
+            for (int j = 0; j < gridHeight; j++) {
+                int aliveNeighbours = getAmountOfAliveNeighbours(i, j);
                 LifeEntity currentLifeEntity = getLifeEntity(i, j);
-                ArrayList<LifeEntity> neighbours = getNeighbours(i, j);
-                int aliveNeighbours = getAmountOfAliveNeighbours(neighbours);
-                currentLifeEntity.state = getNextGenerationLifeEntityState(currentLifeEntity.state, aliveNeighbours);
+                currentLifeEntity.state = Evolution.evolve(currentLifeEntity.state, aliveNeighbours);
             }
         }
+    }
+
+    private int getAmountOfAliveNeighbours(int i, int j) {
+        ArrayList<LifeEntity> neighbours = getNeighbours(i, j);
+        int aliveNeighbours = 0;
+        for (LifeEntity lifeEntity : neighbours) {
+            if (lifeEntity == null) {
+                break;
+            }
+            if (lifeEntity.state == LifeEntityState.ALIVE) {
+                aliveNeighbours++;
+            }
+        }
+        return aliveNeighbours;
     }
 
     private ArrayList<LifeEntity> getNeighbours(int xPosition, int yPosition) {
@@ -84,20 +110,7 @@ public class Grid extends GameObject {
     }
 
     private boolean inValidArrayPosition(int xPosition, int yPosition) {
-        return (xPosition < 0 || xPosition >= GRIDWIDTH || yPosition < 0 || yPosition >= GRIDHEIGHT);
-    }
-
-    private int getAmountOfAliveNeighbours(ArrayList<LifeEntity> neighbours) {
-        int aliveNeighbours = 0;
-        for (LifeEntity lifeEntity : neighbours) {
-            if (lifeEntity == null) {
-                break;
-            }
-            if (lifeEntity.state == LifeEntityState.ALIVE) {
-                aliveNeighbours++;
-            }
-        }
-        return aliveNeighbours;
+        return (xPosition < 0 || xPosition >= gridWidth || yPosition < 0 || yPosition >= gridHeight);
     }
 
     private LifeEntity getLifeEntity(int xPosition, int yPosition) {
@@ -105,13 +118,6 @@ public class Grid extends GameObject {
             return null;
         }
         return gridOfLifeEntities[xPosition][yPosition];
-    }
-
-    private LifeEntityState getNextGenerationLifeEntityState(LifeEntityState currentState, int aliveNeighbours) {
-        if (currentState == LifeEntityState.ALIVE) {
-            return Evolution.aliveStateRule(aliveNeighbours);
-        }
-        return Evolution.deadStateRule(aliveNeighbours);
     }
 
     private class GridOffset {

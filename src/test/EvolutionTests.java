@@ -3,36 +3,38 @@ package test;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import app.rules.Evolution;
-import app.utility.LifeEntityState;
+import app.models.LifeEntityState;
 public class EvolutionTests {
-    
+
     @Test
-    public void testAliveStateEvolution() {
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(-1));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(0));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(1));
-        assertEquals(LifeEntityState.ALIVE, Evolution.aliveStateRule(2));
-        assertEquals(LifeEntityState.ALIVE, Evolution.aliveStateRule(3));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(4));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(5));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(6));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(7));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(8));
-        assertEquals(LifeEntityState.DEAD, Evolution.aliveStateRule(9));
+    public void testAliveEvolutionRule() {
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, -1));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 0));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 1));
+        assertEquals(LifeEntityState.ALIVE, Evolution.evolve(LifeEntityState.ALIVE, 2));
+        assertEquals(LifeEntityState.ALIVE, Evolution.evolve(LifeEntityState.ALIVE, 3));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 4));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 5));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 6));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 7));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 8));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.ALIVE, 9));
     }
 
     @Test
-    public void testDeadStateEvolution() {
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(-1));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(0));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(1));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(2));
-        assertEquals(LifeEntityState.ALIVE, Evolution.deadStateRule(3));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(4));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(5));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(6));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(7));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(8));
-        assertEquals(LifeEntityState.DEAD, Evolution.deadStateRule(9));
+    public void testDeadEvolutionRule() {
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, -1));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 0));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 1));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 2));
+        assertEquals(LifeEntityState.ALIVE, Evolution.evolve(LifeEntityState.DEAD, 3));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 4));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 5));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 6));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 7));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 8));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 9));
+        assertEquals(LifeEntityState.DEAD, Evolution.evolve(LifeEntityState.DEAD, 9));
+
     }
 }
