@@ -1,4 +1,6 @@
-package app;
+package app.components;
+
+import app.Game;
 
 public abstract class GameObject {
 
@@ -7,5 +9,4 @@ public abstract class GameObject {
     }
 
     abstract public void update();
-    abstract public void lateUpdate();
 }

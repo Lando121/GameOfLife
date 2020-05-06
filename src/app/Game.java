@@ -3,6 +3,12 @@ package app;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import app.components.GameObject;
+import app.rendering.GridRenderer;
+import app.rendering.RenderObject;
+import app.rendering.Window;
+
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -22,35 +28,34 @@ public class Game extends Canvas  {
     private static List<RenderObject> renderObjects = new ArrayList<>();
 
     private static final int FPS = 5;
-    private boolean isRunning = true;
+    private final boolean isRunning = true;
 
-    public static void main(String args[]) {
+    public static void main(final String args[]) {
         new Game();
     }
 
-    public static void addUpdateListener(GameObject gameObject){
+    public static void addUpdateListener(final GameObject gameObject) {
         gameObjects.add(gameObject);
     }
 
-    public static void removeRenderListener(GameObject gameObject){
+    public static void removeRenderListener(final GameObject gameObject) {
         gameObjects.remove(gameObject);
     }
 
-    public static void addRenderListener(RenderObject renderObject){
+    public static void addRenderListener(final RenderObject renderObject) {
         renderObjects.add(renderObject);
     }
 
-    public static void removeRenderListener(RenderObject renderObject){
+    public static void removeRenderListener(final RenderObject renderObject) {
         renderObjects.remove(renderObject);
     }
 
     Game() {
-        Window window = new Window(WIDTH, HEIGHT, TITLE, this);
+        final Window window = new Window(WIDTH, HEIGHT, TITLE, this);
         new GridRenderer();
         runGameLoop();
     }
 
- 
     public void runGameLoop() {
         while (isRunning) {
             currentTime = System.currentTimeMillis();
@@ -64,25 +69,25 @@ public class Game extends Canvas  {
     }
 
     private void update() {
-        for (GameObject gameObject : gameObjects) {
+        for (final GameObject gameObject : gameObjects) {
             gameObject.update();
         }
     }
 
     private void render() {
-        BufferStrategy bufferstrategy = getBufferStrategy();
+        final BufferStrategy bufferstrategy = getBufferStrategy();
 
         if (bufferstrategy == null) {
             createBufferStrategy(3);
             return;
         }
 
-        Graphics g = bufferstrategy.getDrawGraphics();
+        final Graphics g = bufferstrategy.getDrawGraphics();
 
         g.setColor(Color.white);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        for (RenderObject renderObject : renderObjects) {
+        for (final RenderObject renderObject : renderObjects) {
             renderObject.render(g);
         }
 

@@ -1,13 +1,17 @@
-package app;
+package app.rendering;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
+import app.Game;
+import app.components.Grid;
+import app.utility.*;
 
 public class GridRenderer extends RenderObject{
 
     private Grid grid;
 
-    GridRenderer() {
+    public GridRenderer() {
         grid = new Grid();
     }
 

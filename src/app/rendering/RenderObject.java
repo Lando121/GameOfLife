@@ -1,6 +1,8 @@
-package app;
+package app.rendering;
 
 import java.awt.Graphics;
+
+import app.Game;
 
 public abstract class RenderObject {
     

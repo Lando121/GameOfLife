@@ -1,4 +1,4 @@
-package app;
+package app.utility;
 
 public enum LifeEntityState {
     ALIVE,

@@ -1,6 +1,7 @@
-package app;
+package app.rendering;
 
 import javax.swing.JFrame;
+import app.Game;
 import java.awt.Dimension;
 
 public class Window {
