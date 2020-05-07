@@ -7,22 +7,21 @@ public class Grid {
     public final int gridWidth;
     public final int gridHeight;
 
-    private final LifeEntity[][] gridOfLifeEntities;
+    private final LifeState[][] gridOfLifeStates;
     private final GridOffset[] neighbourIndexOffsets = new GridOffset[8];
 
     public Grid(int width, int height) {
         gridWidth = width;
         gridHeight = height;
-        gridOfLifeEntities = new LifeEntity[gridWidth][gridHeight];
-        initGridOfLifeEntities();
+        gridOfLifeStates = new LifeState[gridWidth][gridHeight];
+        initGridOfLifeStates();
         initNeighbourIndexOffsets();
     }
 
-    private void initGridOfLifeEntities() {
+    private void initGridOfLifeStates() {
         for (int i = 0; i < gridWidth; i++) {
             for (int j = 0; j < gridHeight; j++) {
-                LifeEntityState state = EnumUtils.randomEnum(LifeEntityState.class);
-                gridOfLifeEntities[i][j] = new LifeEntity(state);
+                gridOfLifeStates[i][j] = EnumUtils.randomEnum(LifeState.class);
             }
         }
     }
@@ -38,23 +37,30 @@ public class Grid {
         neighbourIndexOffsets[7] = new GridOffset(1, 1);
     }
 
-    public ArrayList<LifeEntity> getNeighbours(int xPosition, int yPosition) {
-        ArrayList<LifeEntity> neighbours = new ArrayList<LifeEntity>();
+    public ArrayList<LifeState> getNeighbours(int xPosition, int yPosition) {
+        ArrayList<LifeState> neighbours = new ArrayList<LifeState>();
 
         for (GridOffset gridOffset : neighbourIndexOffsets) {
-            LifeEntity lifeEntity = getLifeEntity(xPosition + gridOffset.x, yPosition + gridOffset.y);
-            if (lifeEntity != null) {
-                neighbours.add(lifeEntity);
+            LifeState lifeState = getLifeState(xPosition + gridOffset.x, yPosition + gridOffset.y);
+            if (lifeState != null) {
+                neighbours.add(lifeState);
             }
         }
         return neighbours;
     }
 
-    public LifeEntity getLifeEntity(int xPosition, int yPosition) {
+    public LifeState getLifeState(int xPosition, int yPosition) {
         if (inValidArrayPosition(xPosition, yPosition)) {
             return null;
         }
-        return gridOfLifeEntities[xPosition][yPosition];
+        return gridOfLifeStates[xPosition][yPosition];
+    }
+
+    public void setLifeState(int xPosition, int yPosition, LifeState state){
+        if (inValidArrayPosition(xPosition, yPosition)) {
+            return;
+        }
+        gridOfLifeStates[xPosition][yPosition] = state;
     }
 
     private boolean inValidArrayPosition(int xPosition, int yPosition) {

@@ -1,27 +1,27 @@
 package app.rules;
 
-import app.components.grid.model.LifeEntityState;
+import app.components.grid.model.LifeState;
 
 public class Evolution {
 
-    public static LifeEntityState getEvolutionStep(LifeEntityState currentState, int aliveNeighbours){
-        if(currentState == LifeEntityState.ALIVE){
+    public static LifeState getEvolutionStep(LifeState currentState, int aliveNeighbours){
+        if(currentState == LifeState.ALIVE){
             return aliveStateRule(aliveNeighbours);
         }
         return deadStateRule(aliveNeighbours);
     }
 
-    private static LifeEntityState aliveStateRule(int aliveNeighbours){
+    private static LifeState aliveStateRule(int aliveNeighbours){
         if (aliveNeighbours >= 2 && aliveNeighbours <= 3) {
-            return LifeEntityState.ALIVE;
+            return LifeState.ALIVE;
         }
-        return LifeEntityState.DEAD;
+        return LifeState.DEAD;
     }
 
-    private static LifeEntityState deadStateRule(int aliveNeighbours){
+    private static LifeState deadStateRule(int aliveNeighbours){
         if (aliveNeighbours == 3) {
-            return LifeEntityState.ALIVE;
+            return LifeState.ALIVE;
         }
-        return LifeEntityState.DEAD;
+        return LifeState.DEAD;
     }
 }

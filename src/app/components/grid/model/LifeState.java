@@ -1,6 +1,6 @@
 package app.components.grid.model;
 
-public enum LifeEntityState {
+public enum LifeState {
     ALIVE,
     DEAD;
 }

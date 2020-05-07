@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import app.Game;
 import app.RenderListener;
 import app.components.grid.model.Grid;
-import app.components.grid.model.LifeEntityState;
+import app.components.grid.model.LifeState;
 
 public class GridRenderer extends RenderListener{
     private final Grid grid;
@@ -21,7 +21,7 @@ public class GridRenderer extends RenderListener{
 
         for (int i = 0; i < grid.gridWidth; i++) {
             for (int j = 0; j < grid.gridHeight; j++) {
-                if (grid.getLifeEntity(i,j).state == LifeEntityState.ALIVE) {
+                if (grid.getLifeState(i,j) == LifeState.ALIVE) {
                     g.setColor(Color.BLACK);
                     g.fillRect(i * gridItemWidth, j * gridItemHeight, gridItemWidth, gridItemHeight);
                 }
