@@ -37,33 +37,37 @@ public class Grid {
         neighbourIndexOffsets[7] = new GridOffset(1, 1);
     }
 
-    public ArrayList<LifeState> getNeighbours(int xPosition, int yPosition) {
+    public ArrayList<LifeState> getNeighbours(int xPosition, int yPosition) throws IllegalArgumentException {
+        if (invalidArrayPosition(xPosition, yPosition)) {
+            throw new IllegalArgumentException();
+        }
         ArrayList<LifeState> neighbours = new ArrayList<LifeState>();
 
         for (GridOffset gridOffset : neighbourIndexOffsets) {
-            LifeState lifeState = getLifeState(xPosition + gridOffset.x, yPosition + gridOffset.y);
-            if (lifeState != null) {
-                neighbours.add(lifeState);
+            if (invalidArrayPosition(xPosition + gridOffset.x, yPosition + gridOffset.y)) {
+                continue;
             }
+            LifeState lifeState = getLifeState(xPosition + gridOffset.x, yPosition + gridOffset.y);
+            neighbours.add(lifeState);
         }
         return neighbours;
     }
 
-    public LifeState getLifeState(int xPosition, int yPosition) {
-        if (inValidArrayPosition(xPosition, yPosition)) {
-            return null;
+    public LifeState getLifeState(int xPosition, int yPosition) throws IllegalArgumentException {
+        if (invalidArrayPosition(xPosition, yPosition)) {
+            throw new IllegalArgumentException();
         }
         return gridOfLifeStates[xPosition][yPosition];
     }
 
-    public void setLifeState(int xPosition, int yPosition, LifeState state){
-        if (inValidArrayPosition(xPosition, yPosition)) {
-            return;
+    public void setLifeState(int xPosition, int yPosition, LifeState state) throws IllegalArgumentException {
+        if (invalidArrayPosition(xPosition, yPosition)) {
+            throw new IllegalArgumentException();
         }
         gridOfLifeStates[xPosition][yPosition] = state;
     }
 
-    private boolean inValidArrayPosition(int xPosition, int yPosition) {
+    private boolean invalidArrayPosition(int xPosition, int yPosition) {
         return (xPosition < 0 || xPosition >= gridWidth || yPosition < 0 || yPosition >= gridHeight);
     }
 

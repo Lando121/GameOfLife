@@ -4,7 +4,11 @@ import app.components.grid.model.LifeState;
 
 public class Evolution {
 
-    public static LifeState getEvolutionStep(LifeState currentState, int aliveNeighbours){
+    public static LifeState getEvolutionStep(LifeState currentState, int aliveNeighbours) throws IllegalArgumentException {
+        if(aliveNeighbours < 0){
+            throw new IllegalArgumentException();
+        }
+
         if(currentState == LifeState.ALIVE){
             return aliveStateRule(aliveNeighbours);
         }

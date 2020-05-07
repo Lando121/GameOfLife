@@ -2,6 +2,8 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import org.junit.Test;
 
 import app.components.grid.model.LifeState;
@@ -10,7 +12,6 @@ public class EvolutionTests {
 
     @Test
     public void testAliveEvolutionRule() {
-        assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.ALIVE, -1));
         assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.ALIVE, 0));
         assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.ALIVE, 1));
         assertEquals(LifeState.ALIVE, Evolution.getEvolutionStep(LifeState.ALIVE, 2));
@@ -25,7 +26,6 @@ public class EvolutionTests {
 
     @Test
     public void testDeadEvolutionRule() {
-        assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.DEAD, -1));
         assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.DEAD, 0));
         assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.DEAD, 1));
         assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.DEAD, 2));
@@ -38,5 +38,12 @@ public class EvolutionTests {
         assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.DEAD, 9));
         assertEquals(LifeState.DEAD, Evolution.getEvolutionStep(LifeState.DEAD, 9));
 
+    }
+
+    @Test
+    public void testEvolutionInvalidInput(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            Evolution.getEvolutionStep(LifeState.ALIVE, -1);
+        });
     }
 }
