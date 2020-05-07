@@ -6,8 +6,8 @@ import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
 
+import app.components.grid.controller.Evolution;
 import app.components.grid.model.LifeState;
-import app.rules.Evolution;
 public class EvolutionTests {
 
     @Test
@@ -36,8 +36,6 @@ public class EvolutionTests {
         assertEquals(LifeState.DEAD, Evolution.getNextGenerationState(LifeState.DEAD, 7));
         assertEquals(LifeState.DEAD, Evolution.getNextGenerationState(LifeState.DEAD, 8));
         assertEquals(LifeState.DEAD, Evolution.getNextGenerationState(LifeState.DEAD, 9));
-        assertEquals(LifeState.DEAD, Evolution.getNextGenerationState(LifeState.DEAD, 9));
-
     }
 
     @Test

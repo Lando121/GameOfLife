@@ -19,7 +19,7 @@ public class Renderer extends Canvas {
     private static final long serialVersionUID = 1L;
 
     public Renderer() {
-        new Window(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, Game.GAME_TITLE, this);
+        new Window(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, this);
     }
 
     public void addRenderListener(RenderListener renderListener) {

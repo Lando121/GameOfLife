@@ -6,7 +6,7 @@ import java.util.List;
 import app.rendering.Renderer;
 
 public class GameLoop {
-    private boolean isRunning = true;
+    private boolean isRunning;
     private long lastUpdateTime;
     private long currentTime;
     private static final int FPS = 5;
@@ -14,7 +14,7 @@ public class GameLoop {
     private static List<UpdateListener> updateListeners = new ArrayList<>();
     private static Renderer renderer;
 
-    GameLoop() {
+    public GameLoop() {
         renderer = new Renderer();
     }
 
@@ -36,7 +36,7 @@ public class GameLoop {
 
     public void start() {
         lastUpdateTime = System.currentTimeMillis();
-
+        isRunning = true;
         while (isRunning) {
             currentTime = System.currentTimeMillis();
 
@@ -46,6 +46,10 @@ public class GameLoop {
                 renderer.render();
             }
         }
+    }
+
+    public void stop(){
+        isRunning = false;
     }
 
     private boolean shouldUpdateGame() {

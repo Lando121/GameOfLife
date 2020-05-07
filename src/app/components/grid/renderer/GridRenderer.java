@@ -8,7 +8,7 @@ import app.RenderListener;
 import app.components.grid.model.Grid;
 import app.components.grid.model.LifeState;
 
-public class GridRenderer extends RenderListener{
+public class GridRenderer extends RenderListener {
     private final Grid grid;
 
     public GridRenderer(Grid grid) {

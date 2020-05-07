@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import app.UpdateListener;
 import app.components.grid.model.Grid;
 import app.components.grid.model.LifeState;
-import app.rules.Evolution;
 
 public class GridController extends UpdateListener {
     Grid grid;
