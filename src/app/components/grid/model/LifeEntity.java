@@ -1,4 +1,4 @@
-package app.models;
+package app.components.grid.model;
 
 public class LifeEntity {
 

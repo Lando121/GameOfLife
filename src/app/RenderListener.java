@@ -1,12 +1,10 @@
-package app.rendering;
+package app;
 
 import java.awt.Graphics;
 
-import app.GameLoop;
-
 public abstract class RenderListener {
     
-    RenderListener(){
+    protected RenderListener(){
         GameLoop.addRenderListener(this);
     }
 

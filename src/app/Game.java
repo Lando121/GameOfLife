@@ -1,7 +1,7 @@
 
 package app;
 
-import app.rendering.GridRenderer;
+import app.components.GridComponent;
 
 public class Game {
     private final int GRID_WIDTH = 100;
@@ -23,7 +23,7 @@ public class Game {
 
     private void setupGame(){
         gameLoop = new GameLoop();
-        new GridRenderer(GRID_WIDTH, GRID_HEIGHT);
+        new GridComponent(GRID_WIDTH, GRID_HEIGHT);
     }
 
     private void startGame(){

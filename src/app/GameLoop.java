@@ -3,8 +3,6 @@ package app;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.components.UpdateListener;
-import app.rendering.RenderListener;
 import app.rendering.Renderer;
 
 public class GameLoop {

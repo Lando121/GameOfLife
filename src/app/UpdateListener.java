@@ -1,10 +1,8 @@
-package app.components;
-
-import app.GameLoop;
+package app;
 
 public abstract class UpdateListener {
 
-    UpdateListener(){
+    protected UpdateListener(){
         GameLoop.addUpdateListener(this);
     }
 

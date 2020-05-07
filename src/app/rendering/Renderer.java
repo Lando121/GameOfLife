@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.Game;
+import app.RenderListener;
 
 public class Renderer extends Canvas {
     private BufferStrategy bufferstrategy;

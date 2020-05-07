@@ -1,10 +1,10 @@
 package app.rules;
 
-import app.models.LifeEntityState;
+import app.components.grid.model.LifeEntityState;
 
 public class Evolution {
 
-    public static LifeEntityState evolve(LifeEntityState currentState, int aliveNeighbours){
+    public static LifeEntityState getEvolutionStep(LifeEntityState currentState, int aliveNeighbours){
         if(currentState == LifeEntityState.ALIVE){
             return aliveStateRule(aliveNeighbours);
         }
