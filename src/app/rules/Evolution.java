@@ -5,7 +5,7 @@ import app.components.grid.model.LifeState;
 public class Evolution {
     private static final String ILLEGAL_ARGUMENT_MESSAGE = "Negative amount of alive neighbours is not allowed";
 
-    public static LifeState getEvolutionStep(LifeState currentState, int aliveNeighbours) {
+    public static LifeState getNextGenerationState(LifeState currentState, int aliveNeighbours) {
         if(aliveNeighbours < 0){
             throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
         }

@@ -36,7 +36,7 @@ public class GridController extends UpdateListener {
             for (int j = 0; j < grid.gridHeight; j++) {
                 int aliveNeighbours = getAmountOfAliveNeighbours(i, j);
                 LifeState lifeState = grid.getLifeState(i, j);
-                nextGenerationGrid[i][j] = Evolution.getEvolutionStep(lifeState, aliveNeighbours);
+                nextGenerationGrid[i][j] = Evolution.getNextGenerationState(lifeState, aliveNeighbours);
             }
         }
     }
