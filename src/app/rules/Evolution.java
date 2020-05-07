@@ -3,10 +3,11 @@ package app.rules;
 import app.components.grid.model.LifeState;
 
 public class Evolution {
+    private static final String ILLEGAL_ARGUMENT_MESSAGE = "Negative amount of alive neighbours is not allowed";
 
-    public static LifeState getEvolutionStep(LifeState currentState, int aliveNeighbours) throws IllegalArgumentException {
+    public static LifeState getEvolutionStep(LifeState currentState, int aliveNeighbours) {
         if(aliveNeighbours < 0){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ILLEGAL_ARGUMENT_MESSAGE);
         }
 
         if(currentState == LifeState.ALIVE){

@@ -10,6 +10,8 @@ public class Grid {
     private final LifeState[][] gridOfLifeStates;
     private final GridOffset[] neighbourIndexOffsets = new GridOffset[8];
 
+    private static final String ARGUMENT_EXCEPTION_MESSAGE = "Indicies out of bounds for the grid";
+
     public Grid(int width, int height) {
         gridWidth = width;
         gridHeight = height;
@@ -37,10 +39,11 @@ public class Grid {
         neighbourIndexOffsets[7] = new GridOffset(1, 1);
     }
 
-    public ArrayList<LifeState> getNeighbours(int xPosition, int yPosition) throws IllegalArgumentException {
+    public ArrayList<LifeState> getNeighbours(int xPosition, int yPosition) {
         if (invalidArrayPosition(xPosition, yPosition)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ARGUMENT_EXCEPTION_MESSAGE);
         }
+
         ArrayList<LifeState> neighbours = new ArrayList<LifeState>();
 
         for (GridOffset gridOffset : neighbourIndexOffsets) {
@@ -51,18 +54,19 @@ public class Grid {
             neighbours.add(lifeState);
         }
         return neighbours;
+
     }
 
-    public LifeState getLifeState(int xPosition, int yPosition) throws IllegalArgumentException {
+    public LifeState getLifeState(int xPosition, int yPosition) {
         if (invalidArrayPosition(xPosition, yPosition)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ARGUMENT_EXCEPTION_MESSAGE);
         }
         return gridOfLifeStates[xPosition][yPosition];
     }
 
-    public void setLifeState(int xPosition, int yPosition, LifeState state) throws IllegalArgumentException {
+    public void setLifeState(int xPosition, int yPosition, LifeState state) {
         if (invalidArrayPosition(xPosition, yPosition)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ARGUMENT_EXCEPTION_MESSAGE);
         }
         gridOfLifeStates[xPosition][yPosition] = state;
     }
