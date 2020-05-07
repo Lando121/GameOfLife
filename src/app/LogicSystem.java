@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class LogicSystem {
     private final LifeState[][] nextGenerationState;
-    GameStateData gameStateData;
+    private GameStateData gameStateData;
 
     public LogicSystem(GameStateData gameStateData){
         this.gameStateData = gameStateData;

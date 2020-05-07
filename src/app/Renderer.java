@@ -40,11 +40,11 @@ public class Renderer extends Canvas {
     }
 
     private void drawGameState() {
-        int gridItemWidth = GameOfLife.WINDOW_WIDTH / GameOfLife.GRID_WIDTH;
-        int gridItemHeight = GameOfLife.WINDOW_HEIGHT / GameOfLife.GRID_HEIGHT;
+        int gridItemWidth = GameOfLife.WINDOW_WIDTH / gameStateData.width;
+        int gridItemHeight = GameOfLife.WINDOW_HEIGHT / gameStateData.height;
 
-        for (int i = 0; i < GameOfLife.GRID_WIDTH; i++) {
-            for (int j = 0; j < GameOfLife.GRID_HEIGHT; j++) {
+        for (int i = 0; i < gameStateData.width; i++) {
+            for (int j = 0; j < gameStateData.height; j++) {
                 if (gameStateData.getLifeState(i,j) == LifeState.ALIVE) {
                     graphics.setColor(Color.BLACK);
                     graphics.fillRect(i * gridItemWidth, j * gridItemHeight, gridItemWidth, gridItemHeight);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class GameStateData {
     public final int width;
     public final int height;
+    
     private final LifeState[][] gridOfLifeStates;
     private final GridOffset[] neighbourIndexOffsets = new GridOffset[8];
 
