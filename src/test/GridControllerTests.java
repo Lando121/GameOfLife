@@ -1,7 +1,6 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
 
@@ -14,7 +13,7 @@ public class GridControllerTests {
     @Test
     public void testGridControllerUpdate(){
         Grid grid = new Grid(3, 3);
-        
+
         grid.setLifeState(0, 0, LifeState.ALIVE);
         grid.setLifeState(0, 1, LifeState.ALIVE);
         grid.setLifeState(0, 2, LifeState.ALIVE);

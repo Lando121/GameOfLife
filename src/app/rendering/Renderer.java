@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-import java.util.List;
 
 import app.Game;
 import app.RenderListener;
@@ -14,26 +13,16 @@ public class Renderer extends Canvas {
     private BufferStrategy bufferstrategy;
     private Graphics graphics;
 
-    private List<RenderListener> renderListeners = new ArrayList<>();
-
     private static final long serialVersionUID = 1L;
 
     public Renderer() {
         new Window(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, this);
     }
 
-    public void addRenderListener(RenderListener renderListener) {
-        renderListeners.add(renderListener);
-    }
-
-    public void removeRenderListener(RenderListener renderObject) {
-        renderListeners.remove(renderObject);
-    }
-
-    public void render() {
+    public void render(ArrayList<RenderListener> renderListeners) {
         setupRendering();
         drawBackground();
-        drawRenderObjects();
+        drawRenderObjects(renderListeners);
         finishRendering();
     }
 
@@ -41,7 +30,7 @@ public class Renderer extends Canvas {
         if (bufferstrategy == null) {
             createBufferStrategy(2);
         }
-        bufferstrategy = getBufferStrategy();      
+        bufferstrategy = getBufferStrategy();
 
         graphics = bufferstrategy.getDrawGraphics();
     }
@@ -51,7 +40,7 @@ public class Renderer extends Canvas {
         graphics.fillRect(0, 0, getWidth(), getHeight());
     }
 
-    private void drawRenderObjects() {
+    private void drawRenderObjects(ArrayList<RenderListener> renderListeners) {
         for (RenderListener renderListener : renderListeners) {
             if (renderListener != null) {
                 renderListener.render(graphics);
@@ -59,7 +48,7 @@ public class Renderer extends Canvas {
         }
     }
 
-    private void finishRendering(){
+    private void finishRendering() {
         graphics.dispose();
         bufferstrategy.show();
     }

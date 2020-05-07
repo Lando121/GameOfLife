@@ -6,32 +6,14 @@ import java.util.List;
 import app.rendering.Renderer;
 
 public class GameLoop {
+    private Game game; 
     private boolean isRunning;
     private long lastUpdateTime;
     private long currentTime;
-    private static final int FPS = 5;
+    private static final int UPDATES_PER_SECOND = 5;
 
-    private static List<UpdateListener> updateListeners = new ArrayList<>();
-    private static Renderer renderer;
-
-    public GameLoop() {
-        renderer = new Renderer();
-    }
-
-    public static void addRenderListener(RenderListener renderObject) {
-        renderer.addRenderListener(renderObject);
-    }
-
-    public static void removeRenderListener(RenderListener renderObject) {
-        renderer.removeRenderListener(renderObject);
-    }
-
-    public static void addUpdateListener(UpdateListener gameObject) {
-        updateListeners.add(gameObject);
-    }
-
-    public static void removeUpdateListener(UpdateListener gameObject) {
-        updateListeners.remove(gameObject);
+    public GameLoop(Game game) {
+        this.game = game;
     }
 
     public void start() {
@@ -42,9 +24,9 @@ public class GameLoop {
 
             if (shouldUpdateGame()) {
                 lastUpdateTime = System.currentTimeMillis();
-                update();
-                renderer.render();
+                game.updateGame();
             }
+            game.renderGame();
         }
     }
 
@@ -53,14 +35,6 @@ public class GameLoop {
     }
 
     private boolean shouldUpdateGame() {
-        return currentTime - lastUpdateTime > 1000 / FPS;
-    }
-
-    private void update() {
-        for (UpdateListener updateListener : updateListeners) {
-            if (updateListener != null) {
-                updateListener.update();
-            }
-        }
+        return currentTime - lastUpdateTime > 1000 / UPDATES_PER_SECOND;
     }
 }
