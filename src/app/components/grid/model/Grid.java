@@ -40,14 +40,14 @@ public class Grid {
     }
 
     public ArrayList<LifeState> getNeighbours(int xPosition, int yPosition) {
-        if (invalidArrayPosition(xPosition, yPosition)) {
+        if (!isValidArrayPosition(xPosition, yPosition)) {
             throw new IllegalArgumentException(ARGUMENT_EXCEPTION_MESSAGE);
         }
 
         ArrayList<LifeState> neighbours = new ArrayList<LifeState>();
 
         for (GridOffset gridOffset : neighbourIndexOffsets) {
-            if (invalidArrayPosition(xPosition + gridOffset.x, yPosition + gridOffset.y)) {
+            if (!isValidArrayPosition(xPosition + gridOffset.x, yPosition + gridOffset.y)) {
                 continue;
             }
             LifeState lifeState = getLifeState(xPosition + gridOffset.x, yPosition + gridOffset.y);
@@ -58,21 +58,21 @@ public class Grid {
     }
 
     public LifeState getLifeState(int xPosition, int yPosition) {
-        if (invalidArrayPosition(xPosition, yPosition)) {
+        if (!isValidArrayPosition(xPosition, yPosition)) {
             throw new IllegalArgumentException(ARGUMENT_EXCEPTION_MESSAGE);
         }
         return gridOfLifeStates[xPosition][yPosition];
     }
 
     public void setLifeState(int xPosition, int yPosition, LifeState state) {
-        if (invalidArrayPosition(xPosition, yPosition)) {
+        if (!isValidArrayPosition(xPosition, yPosition)) {
             throw new IllegalArgumentException(ARGUMENT_EXCEPTION_MESSAGE);
         }
         gridOfLifeStates[xPosition][yPosition] = state;
     }
 
-    private boolean invalidArrayPosition(int xPosition, int yPosition) {
-        return (xPosition < 0 || xPosition >= gridWidth || yPosition < 0 || yPosition >= gridHeight);
+    private boolean isValidArrayPosition(int xPosition, int yPosition) {
+        return (xPosition >= 0 && xPosition < gridWidth || yPosition >= 0 && yPosition < gridHeight);
     }
 
     private class GridOffset {
