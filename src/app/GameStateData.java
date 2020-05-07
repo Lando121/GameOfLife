@@ -1,28 +1,26 @@
-package app.components.grid.model;
+package app;
 
 import java.util.ArrayList;
-import app.utility.*;
 
-public class Grid {
-    public final int gridWidth;
-    public final int gridHeight;
-
+public class GameStateData {
+    public final int width;
+    public final int height;
     private final LifeState[][] gridOfLifeStates;
     private final GridOffset[] neighbourIndexOffsets = new GridOffset[8];
 
     private static final String ARGUMENT_EXCEPTION_MESSAGE = "Indicies out of bounds for the grid";
 
-    public Grid(int width, int height) {
-        gridWidth = width;
-        gridHeight = height;
-        gridOfLifeStates = new LifeState[gridWidth][gridHeight];
+    public GameStateData(int width, int height) {
+        this.width = width;
+        this.height = height;
+        gridOfLifeStates = new LifeState[width][height];
         initGridOfLifeStates();
         initNeighbourIndexOffsets();
     }
 
     private void initGridOfLifeStates() {
-        for (int i = 0; i < gridWidth; i++) {
-            for (int j = 0; j < gridHeight; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 gridOfLifeStates[i][j] = EnumUtils.randomEnum(LifeState.class);
             }
         }
@@ -72,7 +70,7 @@ public class Grid {
     }
 
     private boolean isValidArrayPosition(int xPosition, int yPosition) {
-        return xPosition >= 0 && xPosition < gridWidth && yPosition >= 0 && yPosition < gridHeight;
+        return xPosition >= 0 && xPosition < width && yPosition >= 0 && yPosition < height;
     }
 
     private class GridOffset {

@@ -1,6 +1,4 @@
-package app.components.grid.controller;
-
-import app.components.grid.model.LifeState;
+package app;
 
 public class Evolution {
     private static final String ILLEGAL_ARGUMENT_MESSAGE = "Negative amount of alive neighbours is not allowed";

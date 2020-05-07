@@ -1,13 +1,9 @@
-package app.rendering;
+package app;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-
-import app.Game;
-import app.RenderListener;
 
 public class Renderer extends Canvas {
     private BufferStrategy bufferstrategy;
@@ -15,14 +11,17 @@ public class Renderer extends Canvas {
 
     private static final long serialVersionUID = 1L;
 
-    public Renderer() {
-        new Window(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, this);
+    private GameStateData gameStateData;
+
+    public Renderer(GameStateData gameStateData) {
+        this.gameStateData = gameStateData;
+        new Window(GameOfLife.WINDOW_WIDTH, GameOfLife.WINDOW_HEIGHT, this);
     }
 
-    public void render(ArrayList<RenderListener> renderListeners) {
+    public void render() {
         setupRendering();
         drawBackground();
-        drawRenderObjects(renderListeners);
+        drawGameState();
         finishRendering();
     }
 
@@ -40,10 +39,16 @@ public class Renderer extends Canvas {
         graphics.fillRect(0, 0, getWidth(), getHeight());
     }
 
-    private void drawRenderObjects(ArrayList<RenderListener> renderListeners) {
-        for (RenderListener renderListener : renderListeners) {
-            if (renderListener != null) {
-                renderListener.render(graphics);
+    private void drawGameState() {
+        int gridItemWidth = GameOfLife.WINDOW_WIDTH / GameOfLife.GRID_WIDTH;
+        int gridItemHeight = GameOfLife.WINDOW_HEIGHT / GameOfLife.GRID_HEIGHT;
+
+        for (int i = 0; i < GameOfLife.GRID_WIDTH; i++) {
+            for (int j = 0; j < GameOfLife.GRID_HEIGHT; j++) {
+                if (gameStateData.getLifeState(i,j) == LifeState.ALIVE) {
+                    graphics.setColor(Color.BLACK);
+                    graphics.fillRect(i * gridItemWidth, j * gridItemHeight, gridItemWidth, gridItemHeight);
+                }
             }
         }
     }

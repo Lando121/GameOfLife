@@ -1,4 +1,4 @@
-package app.rendering;
+package app;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;

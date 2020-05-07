@@ -1,4 +1,4 @@
-package app.components.grid.model;
+package app;
 
 public enum LifeState {
     ALIVE,

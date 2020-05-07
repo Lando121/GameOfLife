@@ -6,8 +6,9 @@ import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
 
-import app.components.grid.controller.Evolution;
-import app.components.grid.model.LifeState;
+import app.Evolution;
+import app.LifeState;
+
 public class EvolutionTests {
 
     @Test
