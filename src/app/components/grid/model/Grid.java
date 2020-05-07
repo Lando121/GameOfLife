@@ -72,7 +72,7 @@ public class Grid {
     }
 
     private boolean isValidArrayPosition(int xPosition, int yPosition) {
-        return (xPosition >= 0 && xPosition < gridWidth || yPosition >= 0 && yPosition < gridHeight);
+        return xPosition >= 0 && xPosition < gridWidth && yPosition >= 0 && yPosition < gridHeight;
     }
 
     private class GridOffset {
