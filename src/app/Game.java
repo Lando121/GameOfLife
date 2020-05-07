@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import app.components.GridComponent;
 import app.rendering.Renderer;
-import java.beans.EventHandler;
 
 public class Game {
     private static final int GRID_WIDTH = 100;
@@ -36,10 +35,6 @@ public class Game {
 
     public void startGame(){
         gameLoop.start();
-    }
-
-    public void stopGame(){
-        gameLoop.stop();
     }
 
     public void updateGame(){

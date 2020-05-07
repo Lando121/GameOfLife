@@ -1,10 +1,5 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import app.rendering.Renderer;
-
 public class GameLoop {
     private Game game; 
     private boolean isRunning;
@@ -28,10 +23,6 @@ public class GameLoop {
             }
             game.renderGame();
         }
-    }
-
-    public void stop(){
-        isRunning = false;
     }
 
     private boolean shouldUpdateGame() {
