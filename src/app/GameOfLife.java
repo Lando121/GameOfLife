@@ -6,7 +6,7 @@ public class GameOfLife {
     private static final int GRID_HEIGHT = 100;
     public static final int WINDOW_WIDTH = 1000;
     public static final int WINDOW_HEIGHT = 1000;
-    private static final int UPDATES_PER_SECOND = 5;
+    protected static final int UPDATES_PER_SECOND = 5; //Want to discuss the use of protected for testing purposes
 
     private boolean isRunning;
     private long lastUpdateTime;
@@ -20,7 +20,7 @@ public class GameOfLife {
         new GameOfLife().run();
     }
 
-    GameOfLife() {
+    public GameOfLife() {
         setupGame();
     }
 
@@ -44,15 +44,19 @@ public class GameOfLife {
         }
     }
 
+    public void stop(){
+        isRunning = false;
+    }
+
     private boolean shouldUpdateGame() {
         return currentTime - lastUpdateTime > 1000 / UPDATES_PER_SECOND;
     }
 
-    private void updateGame() {
+    protected void updateGame() {
         logicSystem.update();
     }
 
-    private void renderGame() {
+    protected void renderGame() {
         renderer.render();
     }
 }
