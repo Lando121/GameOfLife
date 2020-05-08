@@ -8,10 +8,10 @@ import app.GameStateData;
 import app.LifeState;
 import app.LogicSystem;
 
-public class GameStateDataControllerTests {
+public class LogicSystemTests {
     
     @Test
-    public void testgameStateDataControllerUpdate(){
+    public void testLogicSystemUpdate(){
         GameStateData gameStateData = new GameStateData(3, 3);
 
         gameStateData.setLifeState(0, 0, LifeState.ALIVE);
@@ -36,6 +36,5 @@ public class GameStateDataControllerTests {
         assertEquals(LifeState.DEAD, gameStateData.getLifeState(2, 0));
         assertEquals(LifeState.DEAD, gameStateData.getLifeState(2, 1));
         assertEquals(LifeState.DEAD, gameStateData.getLifeState(2, 2));
-
     }
 }

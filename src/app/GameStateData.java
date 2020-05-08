@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class GameStateData {
     public final int width;
     public final int height;
-    
+
     private final LifeState[][] gridOfLifeStates;
     private final GridOffset[] neighbourIndexOffsets = new GridOffset[8];
 
@@ -46,14 +46,13 @@ public class GameStateData {
         ArrayList<LifeState> neighbours = new ArrayList<LifeState>();
 
         for (GridOffset gridOffset : neighbourIndexOffsets) {
-            if (!isValidArrayPosition(xPosition + gridOffset.x, yPosition + gridOffset.y)) {
+            if (!isValidArrayPosition(xPosition + gridOffset.deltaX, yPosition + gridOffset.deltaY)) {
                 continue;
             }
-            LifeState lifeState = getLifeState(xPosition + gridOffset.x, yPosition + gridOffset.y);
+            LifeState lifeState = getLifeState(xPosition + gridOffset.deltaX, yPosition + gridOffset.deltaY);
             neighbours.add(lifeState);
         }
         return neighbours;
-
     }
 
     public LifeState getLifeState(int xPosition, int yPosition) {
@@ -71,16 +70,24 @@ public class GameStateData {
     }
 
     private boolean isValidArrayPosition(int xPosition, int yPosition) {
-        return xPosition >= 0 && xPosition < width && yPosition >= 0 && yPosition < height;
+        return isValidXPosition(xPosition) && isValidYPosition(yPosition);
+    }
+
+    private boolean isValidXPosition(int xPosition) {
+        return xPosition >= 0 && xPosition < width;
+    }
+
+    private boolean isValidYPosition(int yPosition) {
+        return yPosition >= 0 && yPosition < height;
     }
 
     private class GridOffset {
-        int x;
-        int y;
+        int deltaX;
+        int deltaY;
 
-        GridOffset(int x, int y) {
-            this.x = x;
-            this.y = y;
+        GridOffset(int deltaX, int deltaY) {
+            this.deltaX = deltaX;
+            this.deltaY = deltaY;
         }
     }
 }

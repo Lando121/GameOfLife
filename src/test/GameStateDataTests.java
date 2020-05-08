@@ -10,7 +10,7 @@ import org.junit.Test;
 import app.GameStateData;
 import app.LifeState;
 
-public class GridTests {
+public class GameStateDataTests {
 
     @Test
     public void testGetNeighbours() {
@@ -92,7 +92,7 @@ public class GridTests {
     }
 
     @Test
-    public void setLifeState() {
+    public void testSetLifeState() {
         GameStateData gameStateData = new GameStateData(2, 2);
 
         gameStateData.setLifeState(0, 0, LifeState.ALIVE);
