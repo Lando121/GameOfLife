@@ -31,8 +31,8 @@ public class GameOfLifeTests {
     }
 
     private class MockGameOfLife extends GameOfLife {
-        public boolean updated;
-        public boolean rendered;
+        private boolean updated;
+        private boolean rendered;
 
         @Override
         protected void updateGame() {
@@ -44,7 +44,7 @@ public class GameOfLifeTests {
             rendered = true;
         }
 
-        public int getDoubleUpdateIntervalInMilliseconds() {
+        private int getDoubleUpdateIntervalInMilliseconds() {
             return 2 * (1000 / UPDATES_PER_SECOND);
         }
     }
