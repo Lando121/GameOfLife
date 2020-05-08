@@ -8,6 +8,9 @@ import java.awt.image.BufferStrategy;
 public class Renderer extends Canvas {
     private BufferStrategy bufferstrategy;
     private Graphics graphics;
+    private int windowWidth;
+    private int windowHeight;
+    private int gridItemSize;
 
     private static final long serialVersionUID = 1L;
 
@@ -15,7 +18,18 @@ public class Renderer extends Canvas {
 
     public Renderer(GameStateData gameStateData) {
         this.gameStateData = gameStateData;
-        new Window(GameOfLife.WINDOW_WIDTH, GameOfLife.WINDOW_HEIGHT, this);
+        gridItemSize = getGridItemSize();
+        setWindowBounds();
+        new Window(windowWidth, windowHeight, this);
+    }
+
+    private int getGridItemSize(){
+        return Math.min(GameOfLife.MAX_WINDOW_SIZE / gameStateData.width, GameOfLife.MAX_WINDOW_SIZE / gameStateData.height);
+    }
+
+    private void setWindowBounds(){
+        windowWidth = gridItemSize * gameStateData.width;
+        windowHeight = gridItemSize * gameStateData.height;
     }
 
     public void render() {
@@ -40,14 +54,11 @@ public class Renderer extends Canvas {
     }
 
     private void drawGameState() {
-        int gridItemWidth = GameOfLife.WINDOW_WIDTH / gameStateData.width;
-        int gridItemHeight = GameOfLife.WINDOW_HEIGHT / gameStateData.height;
-
         for (int i = 0; i < gameStateData.width; i++) {
             for (int j = 0; j < gameStateData.height; j++) {
                 if (gameStateData.getLifeState(i,j) == LifeState.ALIVE) {
                     graphics.setColor(Color.BLACK);
-                    graphics.fillRect(i * gridItemWidth, j * gridItemHeight, gridItemWidth, gridItemHeight);
+                    graphics.fillRect(i * gridItemSize, j * gridItemSize, gridItemSize, gridItemSize);
                 }
             }
         }
