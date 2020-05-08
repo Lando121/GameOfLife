@@ -6,14 +6,12 @@ import java.awt.Color;
 import java.awt.image.BufferStrategy;
 
 public class Renderer extends Canvas {
+    private static final long serialVersionUID = 1L;
     private BufferStrategy bufferstrategy;
     private Graphics graphics;
     private int windowWidth;
     private int windowHeight;
     private int gridItemSize;
-
-    private static final long serialVersionUID = 1L;
-
     private GameStateData gameStateData;
 
     public Renderer(GameStateData gameStateData) {

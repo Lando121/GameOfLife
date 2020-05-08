@@ -2,10 +2,10 @@
 package app;
 
 public class GameOfLife {
-    private static final int GRID_WIDTH = 100;
-    private static final int GRID_HEIGHT = 200;
     public static final int MAX_WINDOW_SIZE = 1000;
     protected static final int UPDATES_PER_SECOND = 5; //Want to discuss the use of protected for testing purposes
+    private static final int GRID_WIDTH = 100;
+    private static final int GRID_HEIGHT = 200;
 
     private boolean isRunning;
     private long lastUpdateTime;

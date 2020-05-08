@@ -3,13 +3,13 @@ package app;
 import java.util.ArrayList;
 
 public class GameStateData {
+    private static final String ARGUMENT_EXCEPTION_MESSAGE = "Indicies out of bounds for the grid";
+
     public final int width;
     public final int height;
 
     private final LifeState[][] gridOfLifeStates;
     private final GridOffset[] neighbourIndexOffsets = new GridOffset[8];
-
-    private static final String ARGUMENT_EXCEPTION_MESSAGE = "Indicies out of bounds for the grid";
 
     public GameStateData(int width, int height) {
         this.width = width;
