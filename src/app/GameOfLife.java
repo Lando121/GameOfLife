@@ -1,11 +1,15 @@
 
 package app;
 
+import app.logic.LogicSystem;
+import app.models.GameStateData;
+import app.rendering.Renderer;
+
 public class GameOfLife {
     public static final int MAX_WINDOW_SIZE = 1000;
-    protected static final int UPDATES_PER_SECOND = 5; //Want to discuss the use of protected for testing purposes
-    private static final int GRID_WIDTH = 100;
-    private static final int GRID_HEIGHT = 200;
+    protected static final int UPDATES_PER_SECOND = 5;
+    private static final int GRID_WIDTH = 200;
+    private static final int GRID_HEIGHT = 100;
 
     private boolean isRunning;
     private long lastUpdateTime;

@@ -1,4 +1,4 @@
-package app;
+package app.models;
 
 public enum LifeState {
     ALIVE,

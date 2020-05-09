@@ -1,9 +1,13 @@
-package app;
+package app.rendering;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
+
+import app.GameOfLife;
+import app.models.GameStateData;
+import app.models.LifeState;
 
 public class Renderer extends Canvas {
     private static final long serialVersionUID = 1L;

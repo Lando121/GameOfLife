@@ -6,8 +6,8 @@ import static org.junit.Assert.assertThrows;
 
 import org.junit.Test;
 
-import app.Evolution;
-import app.LifeState;
+import app.logic.Evolution;
+import app.models.LifeState;
 
 public class EvolutionTests {
 

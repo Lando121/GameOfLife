@@ -1,6 +1,9 @@
-package app;
+package app.logic;
 
 import java.util.ArrayList;
+
+import app.models.GameStateData;
+import app.models.LifeState;
 
 public class LogicSystem {
     private final LifeState[][] nextGenerationState;

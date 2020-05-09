@@ -1,6 +1,7 @@
-package app;
+package app.models;
 
 import java.util.ArrayList;
+import app.utils.EnumUtils;
 
 public class GameStateData {
     private static final String ARGUMENT_EXCEPTION_MESSAGE = "Indicies out of bounds for the grid";

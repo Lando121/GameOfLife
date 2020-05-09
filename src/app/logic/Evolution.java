@@ -1,4 +1,6 @@
-package app;
+package app.logic;
+
+import app.models.LifeState;
 
 public class Evolution {
     private static final String ILLEGAL_ARGUMENT_MESSAGE = "Negative amount of alive neighbours is not allowed";

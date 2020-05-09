@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import app.GameStateData;
-import app.LifeState;
+import app.models.GameStateData;
+import app.models.LifeState;
 
 public class GameStateDataTests {
 

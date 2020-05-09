@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import app.GameStateData;
-import app.LifeState;
-import app.LogicSystem;
+import app.logic.LogicSystem;
+import app.models.GameStateData;
+import app.models.LifeState;
 
 public class LogicSystemTests {
     
