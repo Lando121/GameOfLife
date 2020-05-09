@@ -2,27 +2,28 @@ package com.lando.gameoflife;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import org.junit.jupiter.api.Test;
 
 public class GameOfLifeTests {
+    final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    final MockGameOfLife mockGameOfLife = new MockGameOfLife();
+    final Runnable gameThread = new Runnable() {
+        @Override
+        public void run() {
+            mockGameOfLife.run();
+        }
+    };
 
     @Test
-    public void testGameOfLifeRun() {
-        MockGameOfLife mockGameOfLife = new MockGameOfLife();
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+    public void testGameOfLifeRun() throws InterruptedException {
 
-            @Override
-            public void run() {
-                mockGameOfLife.stop();
-            }
+        scheduler.execute(gameThread);
+        Thread.sleep(mockGameOfLife.getDoubleUpdateIntervalInMilliseconds());
+        mockGameOfLife.stop();
 
-        }, mockGameOfLife.getDoubleUpdateIntervalInMilliseconds());
-
-        mockGameOfLife.run();
         assertEquals(true, mockGameOfLife.updated);
         assertEquals(true, mockGameOfLife.rendered);
     }
